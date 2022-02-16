@@ -1,2 +1,3 @@
-# escuelan7de1ayapteroca.web.app
-https://escuelan7de1ayapteroca.web.app/
+# ESCUELAN7DE1.AYA.PteRoca.com.ar
+Pagina Web de la Escuela https://javierenzo.github.io/ESCUELAN7DE1.AYA.PteRoca.com.ar/
+![docs/PaginaWeb.jpg](docs/PaginaWeb.jpg)

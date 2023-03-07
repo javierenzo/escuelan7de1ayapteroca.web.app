@@ -370,7 +370,7 @@ section
 .main_nav_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 10px;
 	text-transform: uppercase;
 	font-weight: 700;
 	color: #3a3a3a;
@@ -382,9 +382,8 @@ section
 }
 .main_nav_item a:hover
 {
-	color: #ffb606;
+	color: #06a4ff;
 }
-
 /*********************************
 3.3 Header Side
 *********************************/
@@ -393,7 +392,7 @@ section
 {
 	width: 279px;
 	height: 100%;
-	background: #ffb606;
+	background: #06b8ff;
 }
 .header_side img
 {
@@ -781,7 +780,7 @@ section
 }
 .hero_slider_nav:hover
 {
-	background: #ffb606;
+	background: #06b0ff;
 }
 .hero_slider_nav:hover span
 {
@@ -833,7 +832,7 @@ section
 }
 .hero_box:hover
 {
-	background: #ffb606;
+	background: #06cdff;
 }
 .hero_box img
 {
@@ -914,7 +913,7 @@ section
 	width: 55px;
 	height: 4px;
 	content: '';
-	background: #ffb606;
+	background: #06eeff;
 }
 
 /*********************************
@@ -1071,7 +1070,7 @@ section
 {
 	width: 68px;
 	height: 68px;
-	background: #ffb606;
+	background: #07cecea4;
 }
 .novedades_post_date div:first-child
 {
@@ -1143,7 +1142,7 @@ section
 {
 	width: 188px;
 	height: 53px;
-	background: #ffb606;
+	background: #06e2ffd7;
 	margin-top: 18px;
 }
 .novedades_post_button a
@@ -1207,7 +1206,7 @@ section
 }
 .novedades_page_nav ul li.active
 {
-	background: #ffb606;
+	background: #0fb9b9;
 }
 .novedades_page_nav ul li:hover
 {
@@ -1339,14 +1338,14 @@ section
 .tag
 {
 	height: 40px;
-	background: #ffb606;
+	background: #06b2c9;
 	margin-right: 12px;
 	margin-bottom: 10px;
 }
 .tag a
 {
 	display: block;
-	font-size: 16px;
+	font-size: 10px;
 	font-weight: 500;
 	color: #FFFFFF;
 	line-height: 40px;
@@ -1364,7 +1363,7 @@ section
 .register_section
 {
 	width: 100%;
-	background: #ffb606;
+	background: #06e2ff;
 	padding-top: 156px;
 	padding-bottom: 161px;
 }

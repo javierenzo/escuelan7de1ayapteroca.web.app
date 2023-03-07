@@ -363,7 +363,7 @@ section
 .main_nav_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 10px;
 	text-transform: uppercase;
 	font-weight: 700;
 	color: #3a3a3a;
@@ -717,7 +717,7 @@ section
 	width: 55px;
 	height: 4px;
 	content: '';
-	background: #ffb606;
+	background: #06eeff;
 }
 
 /*********************************

@@ -336,7 +336,7 @@ section
 .logo span
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 900;
 	color: #3a3a3a;
 	vertical-align: middle;
@@ -370,7 +370,7 @@ section
 .main_nav_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 10px;
 	text-transform: uppercase;
 	font-weight: 700;
 	color: #3a3a3a;
@@ -382,7 +382,7 @@ section
 }
 .main_nav_item a:hover
 {
-	color: #ffb606;
+	color: #06a4ff;
 }
 
 /*********************************
@@ -393,7 +393,7 @@ section
 {
 	width: 279px;
 	height: 100%;
-	background: #ffb606;
+	background: #06b8ff;
 }
 .header_side img
 {
@@ -741,7 +741,7 @@ section
 }
 .hero_slider_nav:hover
 {
-	background: #ffb606;
+	background: #06b0ff;
 }
 .hero_slider_nav:hover span
 {
@@ -793,7 +793,7 @@ section
 }
 .hero_box:hover
 {
-	background: #ffb606;
+	background: #06cdff;
 }
 .hero_box img
 {
@@ -874,7 +874,7 @@ section
 	width: 55px;
 	height: 4px;
 	content: '';
-	background: #ffb606;
+	background: #06eeff;
 }
 
 /*********************************
@@ -1017,7 +1017,7 @@ section
 .register_section
 {
 	width: 100%;
-	background: #ffb606;
+	background: #06e2ff;
 	padding-top: 156px;
 	padding-bottom: 161px;
 }

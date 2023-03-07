@@ -83,7 +83,7 @@ ul
 p
 {
 	font-family: 'Roboto', sans-serif;
-	font-size: 10px;
+	font-size: 14px;
 	line-height: 2.29;
 	font-weight: 400;
 	color: #a5a5a5;
@@ -513,7 +513,7 @@ section
 }
 .menu_item a:hover
 {
-	color: #ffb606;
+	color: #06eeff;
 }
 .menu_close_container
 {

@@ -83,7 +83,7 @@ ul
 p
 {
 	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
+	font-size: 25px;
 	line-height: 2.29;
 	font-weight: 400;
 	color: #a5a5a5;
@@ -501,7 +501,7 @@ section
 .menu_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 36px;
+	font-size: 22px;
 	font-weight: 700;
 	color: #3a3a3a;
 	-webkit-transition: all 200ms ease;
@@ -947,7 +947,8 @@ section
 
 .popular
 {
-
+	padding: 0;
+	margin: 0;
 }
 .course_boxes
 {
@@ -1047,7 +1048,7 @@ section
 }
 .novedades_post
 {
-	margin-bottom: 85px;
+	margin-bottom: 8px;
 }
 .novedades_post:last-child
 {
@@ -1490,6 +1491,8 @@ input:last-of-type
 
 .services
 {
+	padding: 0;
+ 	margin: 0;
 	padding-bottom: 76px;
 }
 .services_row

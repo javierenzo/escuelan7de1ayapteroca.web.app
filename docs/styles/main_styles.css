@@ -83,7 +83,7 @@ ul
 p
 {
 	font-family: 'Roboto', sans-serif;
-	font-size: 10px;
+	font-size: 25px;
 	line-height: 2.29;
 	font-weight: 400;
 	color: #a5a5a5;
@@ -502,7 +502,7 @@ section
 .menu_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 36px;
+	font-size: 16px;
 	font-weight: 700;
 	color: #3a3a3a;
 	-webkit-transition: all 200ms ease;
@@ -583,6 +583,7 @@ section
 	opacity: 0;
 	padding-left: 4px;
 }
+
 .menu_social_item
 {
 	display: inline-block;
@@ -606,6 +607,7 @@ section
 	opacity: 1;
 }
 
+ 
 /*********************************
 4.2 Menu copyright
 *********************************/
@@ -908,7 +910,8 @@ section
 
 .popular
 {
-
+	padding: 0;
+	margin: 0;
 }
 .course_boxes
 {
@@ -1016,6 +1019,7 @@ section
 }
 .register_section
 {
+	
 	width: 100%;
 	background: #06e2ff;
 	padding-top: 156px;
@@ -1144,6 +1148,8 @@ input:last-of-type
 
 .services
 {
+	padding: 0;
+ 	margin: 0;
 	padding-bottom: 76px;
 }
 .services_row

@@ -1022,8 +1022,8 @@ section
 	
 	width: 100%;
 	background: #06e2ff;
-	padding-top: 156px;
-	padding-bottom: 161px;
+	padding-top: 26px;
+	padding-bottom: 21px;
 }
 .register_content
 {
@@ -1375,9 +1375,11 @@ input:last-of-type
 	padding-top: 86px;
 	background: #1a1a1a;
 }
+
 .footer .section_title h1
 {
 	color: #FFFFFF;
+	
 }
 
 /*********************************
@@ -1429,8 +1431,8 @@ input:last-of-type
 
 .footer_content 
 {
-	padding-top: 80px;
-	padding-bottom: 83px;
+	padding-top: 26px;
+	padding-bottom: 21px;
 	border-bottom: solid 2px #4d4e4e;
 }
 .footer_content .logo_container

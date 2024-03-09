@@ -146,7 +146,7 @@
 6. 991px
 ************/
 
-@media only screen and (max-width: 991px)
+@media only screen and (max-width: 768px)
 {
 	.main_nav_container
 	{
@@ -231,11 +231,36 @@
 	{
 		margin-bottom: 30px;
 	}
+	.footer_about_text, .footer_column_content {
+        padding: 5px;
+    }
+    /* Ajusta el tamaño de las imágenes para que no desborden el contenedor */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
 	.footer_col:last-child
 	{
 		margin-bottom: 0px;
 	}
 }
+
+@media only screen and (max-width: 768px) {
+    .footer_col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .footer_about_text, .footer_column_content {
+        padding: 5px;
+    }
+    /* Ajusta el tamaño de las imágenes para que no desborden el contenedor */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 
 /************
 7. 959px

@@ -1451,14 +1451,14 @@ input:last-of-type
 }
 .footer_column_title
 {
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 500;
 	color: #FFFFFF;
-	padding-top: 15px;
+	padding-top: 25px;
 }
 .footer_column_content
 {
-	margin-top: 32px;
+	margin-top: 5px;
 }
 .footer_list_item
 {

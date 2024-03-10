@@ -88,11 +88,24 @@
 	}
 	.header_side
 	{
-		display: none !important;
+		display:flex;
 	}
 	.main_nav_container
 	{
 		padding-right: 53px;
+	}
+	.hero_slide_content h1
+	{
+		font-size: 56px;
+	}
+	.card-title
+	{
+		font-size: 20px;
+	}
+	.register_content,
+	.search_content
+	{
+		width: 442px;
 	}
 }
 
@@ -102,7 +115,10 @@
 
 @media only screen and (max-width: 1199px)
 {
-	
+	.hero_box
+	{
+		padding-left: 20px;
+	}
 }
 
 /************
@@ -144,11 +160,70 @@
 	{
 		display: block;
 	}
-	.sidebar
+	.hero_slide_content h1
 	{
-		margin-top: 120px;
+		font-size: 48px;
 	}
-	.comunidad_form_container
+	.hero_boxes
+	{
+		width: 100%;
+		height: auto;
+		padding-top: 117px;
+	}
+	.hero_boxes_inner
+	{
+		position: relative;
+		top: auto;
+		left: auto;
+	}
+	.hero_box
+	{
+		padding-left: 50px;
+	}
+	.hero_box_col
+	{
+		margin-bottom: 30px;
+	}
+	.hero_box_col:last-child
+	{
+		margin-bottom: 0px;
+	}
+	.course_box
+	{
+		margin-bottom: 80px;
+	}
+	.course_box:last-child
+	{
+		margin-bottom: 0px;
+	}
+	.search_section
+	{
+		padding-top: 156px;
+		padding-bottom: 161px;
+	}
+	.register_content,
+	.search_content
+	{
+		width: 75%;
+	}
+	.testimonials_slider_container
+	{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.event_date
+	{
+		margin-top: 30px;
+	}
+	.event_name
+	{
+		margin-top: 17px;
+	}
+	.event_content p
+	{
+		margin-bottom: 0px;
+	}
+	.newsletter_form_container
 	{
 		width: 90%;
 	}
@@ -160,6 +235,21 @@
 	{
 		margin-bottom: 0px;
 	}
+}
+
+@media only screen and (max-width: 768px) {
+    .footer_col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .footer_about_text, .footer_column_content {
+        padding: 5px;
+    }
+    /* Ajusta el tamaño de las imágenes para que no desborden el contenedor */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 /************
@@ -201,7 +291,6 @@
 		width: 100vw;
 		height: 100vh;
 	}
-	
 	.newsletter_email
 	{
 		width: 100%;
@@ -265,32 +354,77 @@
 		right: 30px;
 		top: 34px;
 	}
-	.home
+	.hero_slider_nav
 	{
-		height: 372px;
+		display: none;
 	}
-	.home_content
+	.hero_slide_content
 	{
-		padding-top: 17px;
-	    padding-bottom: 11px;
-	    padding-left: 22px;
-	    padding-right: 24px;
+		max-width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
 	}
-	.home_content h1
+	.card-title
 	{
-		font-size: 30px;
+		margin-top: 30px;
 	}
-	
-	.tag
+	.card-title a
 	{
-		height: 35px;
+		font-size: 20px;
 	}
-	.tag a
+	.card-text
+	{
+		font-size: 13px;
+	}
+	.price_box
+	{
+		margin-top: 37px;
+	}
+	.register_section,
+	.search_section
+	{
+		padding-top: 115px;
+		padding-bottom: 120px;
+	}
+	.register_content,
+	.search_content
+	{
+		width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.register_text
+	{
+		margin-top: 25px;
+	}
+	.register_button
+	{
+		margin-top: 53px;
+	}
+	.testimonials_slider .owl-dots
+	{
+		display: none !important;
+	}
+	.testimonials_item
+	{
+		padding-bottom: 0px;
+	}
+	.event_date
+	{
+		width: 100px;
+		height: 100px;
+	}
+	.event_day
+	{
+		font-size: 36px;
+	}
+	.event_month
 	{
 		font-size: 14px;
-		line-height: 35px;
-		padding-left: 23px;
-    	padding-right: 23px;
+	}
+	.event_name
+	{
+		margin-top: 5px;
 	}
 	.footer_bar
 	{
@@ -335,6 +469,43 @@
 	{
 		height: 60px;
 		top: 15px;
+	}
+	.hero_slide_content h1
+	{
+		font-size: 28px;
+	}
+	.hero_slide_content h1 span
+	{
+		padding-left: 5px;
+		padding-right: 5px;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.hero_boxes
+	{
+		padding-top: 80px;
+	}
+	.hero_box
+	{
+		padding-left: 15px;
+		height: 120px;
+	}
+	.hero_box_content
+	{
+		padding-top: 6px;
+	}
+	.hero_box img
+	{
+		width: 45px;
+	}
+	.hero_box_title
+	{
+		font-size: 18px;
+		margin-bottom: 3px;
+	}
+	.hero_box_link
+	{
+		font-size: 10px;
 	}
 }
 

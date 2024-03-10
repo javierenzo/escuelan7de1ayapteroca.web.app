@@ -88,7 +88,7 @@
 	}
 	.header_side
 	{
-		display: none !important;
+		display:flex;
 	}
 	.main_nav_container
 	{
@@ -237,6 +237,21 @@
 	}
 }
 
+@media only screen and (max-width: 768px) {
+    .footer_col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .footer_about_text, .footer_column_content {
+        padding: 5px;
+    }
+    /* Ajusta el tamaño de las imágenes para que no desborden el contenedor */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 /************
 7. 959px
 ************/
@@ -275,15 +290,6 @@
 		right: -100vw;
 		width: 100vw;
 		height: 100vh;
-	}
-	.novedades_post_title_container
-	{
-		margin-top: -4px;
-		padding-left: 21px;
-	}
-	.novedades_post_title a
-	{
-		font-size: 27px;
 	}
 	.newsletter_email
 	{
@@ -347,53 +353,6 @@
 	{
 		right: 30px;
 		top: 34px;
-	}
-	.novedades_post_title_container
-	{
-		margin-top: 20px;
-		padding-left: 0px;
-	}
-	.novedades_post_date
-	{
-		width: 55px;
-		height: 55px;
-	}
-	.novedades_post_date div:first-child
-	{
-		font-size: 18px;
-	}
-	.novedades_post_date div:last-child
-	{
-		font-size: 11px;
-	}
-	.novedades_post_title a
-	{
-		font-size: 20px;
-	}
-	.novedades_post_text
-	{
-		margin-top: 20px;
-	}
-	.novedades_post_button
-	{
-		width: 138px;
-		height: 42px;
-	}
-	.novedades_post_button a
-	{
-		font-size: 14px;
-		line-height: 42px;
-	}
-	.tag
-	{
-		height: 35px;
-	}
-	.tag a
-	{
-		font-size: 14px;
-		line-height: 35px;
-		padding-left: 23px;
-    	padding-right: 23px;
 	}
 	.hero_slider_nav
 	{

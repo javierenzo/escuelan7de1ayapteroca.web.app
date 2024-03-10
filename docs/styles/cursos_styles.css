@@ -331,12 +331,12 @@ section
 .logo_container
 {
 	display: inline-block;
-	padding-left: 76px;
+	padding-left: 6px;
 }
 .logo span
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 15px;
+	font-size: 12px;
 	font-weight: 900;
 	color: #3a3a3a;
 	vertical-align: middle;

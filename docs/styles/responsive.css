@@ -227,10 +227,36 @@
 	{
 		width: 90%;
 	}
+	/* Estilos por defecto para pantallas grandes */
+	.col-lg-4.service_item {
+		width: 50%; /* Asumiendo que quieres 4 columnas en pantallas grandes */
+		float: left;
+	}
+	
+	/* Estilos para pantallas más pequeñas */
+	@media screen and (max-width: 720px) {
+		.col-lg-4.service_item {
+			width: 50%; /* Cada div ocupará el ancho completo de la pantalla */
+			float: none;
+		}
+	}
 	.footer_col
 	{
 		margin-bottom: 30px;
 	}
+	/* Estilos por defecto para pantallas grandes */
+.col-lg-3.footer_col {
+    width: 25%; /* Asumiendo que quieres 4 columnas en pantallas grandes */
+    float: left;
+}
+
+/* Estilos para pantallas más pequeñas */
+@media screen and (max-width: 720px) {
+    .col-lg-3.footer_col {
+        width: 50%; /* Cada div ocupará el ancho completo de la pantalla */
+        float: none;
+    }
+}
 	.footer_col:last-child
 	{
 		margin-bottom: 0px;
@@ -250,6 +276,7 @@
         max-width: 100%;
         height: auto;
     }
+	
 }
 
 /************

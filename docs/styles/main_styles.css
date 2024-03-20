@@ -502,7 +502,7 @@ section
 .menu_item a
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
+	font-size: 22px;
 	font-weight: 700;
 	color: #3a3a3a;
 	-webkit-transition: all 200ms ease;
@@ -513,7 +513,7 @@ section
 }
 .menu_item a:hover
 {
-	color: #06eeff;
+	color: #ffb606;
 }
 .menu_close_container
 {
@@ -583,11 +583,10 @@ section
 	opacity: 0;
 	padding-left: 4px;
 }
-
 .menu_social_item
 {
 	display: inline-block;
-	margin-right: 7px;
+	margin-right: 30px;
 }
 .menu_social_item a i
 {
@@ -607,7 +606,6 @@ section
 	opacity: 1;
 }
 
- 
 /*********************************
 4.2 Menu copyright
 *********************************/
@@ -848,8 +846,8 @@ section
 
 .page_section
 {
-	padding-top: 117px;
-	padding-bottom: 117px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 .section_title
 {
@@ -1008,7 +1006,6 @@ section
 	-webkit-filter: grayscale(0);
 	filter: grayscale(0);
 }
-
 /*********************************
 10. Register
 *********************************/
@@ -1019,7 +1016,6 @@ section
 }
 .register_section
 {
-	
 	width: 100%;
 	background: #06e2ff;
 	padding-top: 26px;
@@ -1154,11 +1150,11 @@ input:last-of-type
 }
 .services_row
 {
-	margin-top: 65px;
+	margin-top: 15px;
 }
 .service_item
 {
-	margin-bottom: 41px;
+	margin-bottom: 15px;
 }
 .service_item h3
 {
@@ -1375,11 +1371,9 @@ input:last-of-type
 	padding-top: 6px;
 	background: #1a1a1a;
 }
-
 .footer .section_title h1
 {
 	color: #FFFFFF;
-	
 }
 
 /*********************************
@@ -1451,10 +1445,10 @@ input:last-of-type
 }
 .footer_column_title
 {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	color: #FFFFFF;
-	padding-top: 25px;
+	padding-top: 15px;
 }
 .footer_column_content
 {

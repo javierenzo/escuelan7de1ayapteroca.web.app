@@ -227,6 +227,18 @@
 	{
 		width: 90%;
 	}
+	.col-lg-4.service_item {
+		width: 50%; /* Asumiendo que quieres 4 columnas en pantallas grandes */
+		float: left;
+	}
+	
+	/* Estilos para pantallas más pequeñas */
+	@media screen and (max-width: 720px) {
+		.col-lg-4.service_item {
+			width: 50%; /* Cada div ocupará el ancho completo de la pantalla */
+			float: none;
+		}
+	}
 	.footer_col
 	{
 		margin-bottom: 30px;

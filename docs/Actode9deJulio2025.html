@@ -366,10 +366,41 @@
             font-weight: 400;
             margin: 0 0.25rem; /* Space between links */
             white-space: nowrap; /* Prevent text wrapping within a link */
+            display: inline-block; /* Added for relative positioning of pseudo-elements */
+            position: relative; /* Crucial for positioning the star */
         }
         .navbar a:hover {
             background-color: #2563eb; /* Darker blue on hover */
         }
+
+        /* Falling star effect */
+        .falling-star {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 10%, transparent 70%); /* Brighter star */
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none; /* Ensure it doesn't interfere with clicks */
+            z-index: 1; /* Above the link text */
+        }
+
+        @keyframes star-fall {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(calc(100% + 20px)) scale(0.5); /* Fall past the bottom of the link */
+            }
+        }
+
 
         /* Scroll margin for anchor targets */
         h2[id], h3[id] {
@@ -488,7 +519,7 @@
         <a href="#celebracion-title">Celebración</a>
         <a href="#celebra-independencia-title">¡Celebra!</a>
         <a href="#juego-independencia-title">Juego de Independencia</a>
-        <a href="https://escuelan7de1ayapteroca.web.app/" target="_blank">EPA7de1</a> <!-- New link added here -->
+        <a href="https://escuelan7de1ayapteroca.web.app/" target="_blank" class="epa7de1-link">EPA7de1</a> <!-- Added epa7de1-link class -->
         <a href="#video-independencia-title">Video la Independencia Argentina</a>
         <a href="#video-mujeres-title">Video Mujeres de la Independencia</a>
     </nav>
@@ -1310,7 +1341,6 @@
                 } else {
                     questionFeedback.textContent = '¡Incorrecto! La respuesta correcta era: ' + questionData.options[questionData.correct];
                     questionFeedback.style.color = '#ef4444'; // Red
-                    optionsButtons[selectedIndex].classList.add('incorrect');
                     optionsButtons[questionData.correct].classList.add('correct'); // Highlight correct answer
                 }
 
@@ -1362,6 +1392,48 @@
             startQuizBtn.addEventListener('click', startQuiz);
             nextQuestionBtn.addEventListener('click', nextQuestion);
             restartQuizBtn.addEventListener('click', restartQuiz);
+
+            // --- Star Rain Effect Logic ---
+            const epaLink = document.querySelector('.epa7de1-link'); // Select by the new class
+            let starInterval;
+
+            function createFallingStar() {
+                if (!epaLink) return;
+
+                const star = document.createElement('div');
+                star.classList.add('falling-star');
+
+                const linkRect = epaLink.getBoundingClientRect();
+                // Position stars randomly across the width of the link
+                const startLeft = Math.random() * linkRect.width;
+                // Start stars slightly above the link
+                const startTop = - (Math.random() * 20 + 5);
+
+                star.style.left = `${startLeft}px`;
+                star.style.top = `${startTop}px`;
+                star.style.width = `${Math.random() * 4 + 4}px`; // 4px to 8px
+                star.style.height = star.style.width;
+
+                const duration = Math.random() * 1.5 + 1; // 1 to 2.5 seconds
+                const delay = Math.random() * 0.5; // 0 to 0.5 seconds
+                star.style.animation = `star-fall ${duration}s linear ${delay}s forwards`;
+
+                epaLink.appendChild(star);
+
+                star.addEventListener('animationend', () => {
+                    star.remove();
+                });
+            }
+
+            epaLink.addEventListener('mouseover', () => {
+                // Clear any existing interval to prevent multiple intervals running
+                if (starInterval) clearInterval(starInterval);
+                starInterval = setInterval(createFallingStar, 100); // Generate a star every 100ms
+            });
+
+            epaLink.addEventListener('mouseout', () => {
+                clearInterval(starInterval);
+            });
         });
     </script>
 </body>

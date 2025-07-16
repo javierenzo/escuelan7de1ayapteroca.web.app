@@ -397,6 +397,65 @@
             border: 0;
         }
 
+        /* Quiz specific styles */
+        .quiz-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .quiz-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 0.75rem;
+            border-radius: 0.5rem;
+            background-color: #edf2f7; /* Light gray for options */
+            color: #2d3748; /* Dark text for options */
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .quiz-options button:hover:not(:disabled) {
+            background-color: #e2e8f0; /* Slightly darker on hover */
+            transform: translateY(-2px);
+        }
+        .quiz-options button.correct {
+            background-color: #48bb78; /* Green for correct */
+            color: white;
+        }
+        .quiz-options button.incorrect {
+            background-color: #ef4444; /* Red for incorrect */
+            color: white;
+        }
+        .quiz-options button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .quiz-timer {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #4299e1; /* Blue for timer */
+        }
+        .question-counter {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #6b7280; /* Gray text for counter */
+        }
+
 
         @media (max-width: 768px) {
             .navbar {
@@ -428,6 +487,7 @@
         <a href="#legado-title">Legado</a>
         <a href="#celebracion-title">Celebración</a>
         <a href="#celebra-independencia-title">¡Celebra!</a>
+        <a href="#juego-independencia-title">Juego de Independencia</a>
         <a href="#video-independencia-title">Video la Independencia Argentina</a>
         <a href="#video-mujeres-title">Video Mujeres de la Independencia</a>
     </nav>
@@ -682,6 +742,36 @@
             <!-- New elements for "Viva la Independencia" and "Viva la Patria" -->
             <div id="viva-independencia-text" class="viva-text">¡Viva la Independencia!</div>
             <div id="viva-patria-text" class="viva-text viva-patria-text">¡Viva la Patria!</div>
+        </section>
+
+        <!-- New section for the quiz game -->
+        <section class="section-card">
+            <h2 id="juego-independencia-title" class="text-2xl mb-4">Juego: ¿Cuánto sabes de la Independencia Argentina?</h2>
+            <div class="quiz-container">
+                <div id="quiz-start-screen">
+                    <p class="text-lg mb-4">Pon a prueba tus conocimientos sobre la Declaración de Independencia de Argentina.</p>
+                    <button id="start-quiz-btn" class="btn-primary">Comenzar Juego</button>
+                </div>
+
+                <div id="quiz-game-screen" class="hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="quiz-timer">Tiempo restante: <span id="time-left">03:00</span></div>
+                        <div class="question-counter">Pregunta <span id="current-question-number">1</span> de <span id="total-questions-quiz">10</span></div>
+                    </div>
+                    <p id="quiz-question" class="quiz-question"></p>
+                    <div id="quiz-options" class="grid grid-cols-1 gap-2">
+                        <!-- Options will be dynamically inserted here -->
+                    </div>
+                    <p id="question-feedback" class="quiz-feedback mt-4"></p>
+                    <button id="next-question-btn" class="btn-primary mt-4 hidden">Siguiente Pregunta</button>
+                </div>
+
+                <div id="quiz-result-screen" class="hidden">
+                    <p class="text-lg mb-4">¡Juego Terminado!</p>
+                    <p class="text-2xl font-bold mb-4">Tu puntuación: <span id="final-score">0</span> / <span id="total-questions-result">10</span></p>
+                    <button id="restart-quiz-btn" class="btn-primary">Jugar de nuevo</button>
+                </div>
+            </div>
         </section>
 
         <!-- Section for the first YouTube video -->
@@ -1082,6 +1172,194 @@
             document.getElementById('btn-celebracion').addEventListener('click', () => {
                 generateImageForSection(prompts.celebracion, 'btn-celebracion', 'img-celebracion', 'spinner-celebracion', 'text-celebracion');
             });
+
+            // --- New Quiz Game Logic ---
+            const quizQuestions = [
+                {
+                    question: "¿En qué ciudad se declaró la Independencia de Argentina?",
+                    options: ["Buenos Aires", "Córdoba", "San Miguel de Tucumán", "Salta"],
+                    correct: 2 // Index of "San Miguel de Tucumán"
+                },
+                {
+                    question: "¿En qué año se declaró la Independencia de Argentina?",
+                    options: ["1810", "1816", "1820", "1825"],
+                    correct: 1 // Index of "1816"
+                },
+                {
+                    question: "¿Quién fue el presidente del Congreso de Tucumán que preguntó si querían ser independientes?",
+                    options: ["Manuel Belgrano", "José de San Martín", "Francisco Narciso de Laprida", "Juan José Paso"],
+                    correct: 2 // Index of "Francisco Narciso de Laprida"
+                },
+                {
+                    question: "¿Cuál fue el nombre completo del documento que proclamó la independencia?",
+                    options: ["Acta de Libertad Argentina", "Acta de la Independencia de las Provincias Unidas en Sud América", "Declaración de Soberanía Nacional", "Manifiesto de la Nación Argentina"],
+                    correct: 1 // Index of "Acta de la Independencia de las Provincias Unidas en Sud América"
+                },
+                {
+                    question: "¿Qué evento importante ocurrió el 25 de mayo de 1810?",
+                    options: ["Declaración de Independencia", "Revolución de Mayo", "Batalla de Tucumán", "Creación de la bandera"],
+                    correct: 1 // Index of "Revolución de Mayo"
+                },
+                {
+                    question: "¿Qué se abolió en la Asamblea del Año XIII?",
+                    options: ["La esclavitud", "Los títulos de nobleza", "El comercio con España", "Los impuestos"],
+                    correct: 1 // Index of "Los títulos de nobleza"
+                },
+                {
+                    question: "¿Quién creó la bandera argentina?",
+                    options: ["José de San Martín", "Martín Miguel de Güemes", "Manuel Belgrano", "Juan Martín de Pueyrredón"],
+                    correct: 2 // Index of "Manuel Belgrano"
+                },
+                {
+                    question: "¿Contra qué país se declaró la independencia?",
+                    options: ["Portugal", "Francia", "Inglaterra", "España"],
+                    correct: 3 // Index of "España"
+                },
+                {
+                    question: "¿Qué frase se gritó unánimemente después de la pregunta de Laprida?",
+                    options: ["¡Viva la Patria!", "¡Libertad o Muerte!", "¡SÍ, QUEREMOS!", "¡Independencia ahora!"],
+                    correct: 2 // Index of "¡SÍ, QUEREMOS!"
+                },
+                {
+                    question: "¿Cuál de estas figuras fue clave en el proceso independentista, pero no firmó el Acta de Independencia?",
+                    options: ["José de San Martín", "Juan José Paso", "Mariano Moreno", "Bernardino Rivadavia"],
+                    correct: 0 // Index of "José de San Martín" (he was campaigning, not in Tucumán)
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timeLeft = 3 * 60; // Changed to 3 minutes (180 seconds)
+            let timerInterval;
+
+            const quizStartScreen = document.getElementById('quiz-start-screen');
+            const quizGameScreen = document.getElementById('quiz-game-screen');
+            const quizResultScreen = document.getElementById('quiz-result-screen');
+            const startQuizBtn = document.getElementById('start-quiz-btn');
+            const timeLeftSpan = document.getElementById('time-left');
+            const quizQuestionElement = document.getElementById('quiz-question');
+            const quizOptionsContainer = document.getElementById('quiz-options');
+            const questionFeedback = document.getElementById('question-feedback');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const finalScoreSpan = document.getElementById('final-score');
+            const totalQuestionsResultSpan = document.getElementById('total-questions-result'); // Changed ID
+            const currentQuestionNumberSpan = document.getElementById('current-question-number'); // New element
+            const totalQuestionsQuizSpan = document.getElementById('total-questions-quiz'); // New element
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+
+            totalQuestionsResultSpan.textContent = quizQuestions.length; // Set total questions display on result screen
+            totalQuestionsQuizSpan.textContent = quizQuestions.length; // Set total questions display on game screen
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+
+            function updateTimerDisplay() {
+                timeLeftSpan.textContent = formatTime(timeLeft);
+            }
+
+            function startTimer() {
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        endQuiz(true); // true indicates time ran out
+                    }
+                }, 1000);
+            }
+
+            function displayQuestion() {
+                questionFeedback.textContent = ''; // Clear previous feedback
+                nextQuestionBtn.classList.add('hidden'); // Hide next button
+
+                currentQuestionNumberSpan.textContent = currentQuestionIndex + 1; // Update question counter
+
+                const questionData = quizQuestions[currentQuestionIndex];
+                quizQuestionElement.textContent = questionData.question;
+                quizOptionsContainer.innerHTML = ''; // Clear previous options
+
+                questionData.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('btn-primary'); // Apply base button style
+                    button.addEventListener('click', () => checkAnswer(index));
+                    quizOptionsContainer.appendChild(button);
+                });
+
+                // Enable all buttons for the new question
+                Array.from(quizOptionsContainer.children).forEach(button => button.disabled = false);
+            }
+
+            function checkAnswer(selectedIndex) {
+                const questionData = quizQuestions[currentQuestionIndex];
+                const optionsButtons = Array.from(quizOptionsContainer.children);
+
+                // Disable all buttons after an answer is selected
+                optionsButtons.forEach(button => button.disabled = true);
+
+                if (selectedIndex === questionData.correct) {
+                    score++;
+                    questionFeedback.textContent = '¡Correcto!';
+                    questionFeedback.style.color = '#10b981'; // Green
+                    optionsButtons[selectedIndex].classList.add('correct');
+                } else {
+                    questionFeedback.textContent = '¡Incorrecto! La respuesta correcta era: ' + questionData.options[questionData.correct];
+                    questionFeedback.style.color = '#ef4444'; // Red
+                    optionsButtons[selectedIndex].classList.add('incorrect');
+                    optionsButtons[questionData.correct].classList.add('correct'); // Highlight correct answer
+                }
+
+                if (currentQuestionIndex < quizQuestions.length - 1) {
+                    nextQuestionBtn.classList.remove('hidden'); // Show next button
+                } else {
+                    setTimeout(() => endQuiz(false), 1500); // End quiz after a short delay if it's the last question
+                }
+            }
+
+            function nextQuestion() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    displayQuestion();
+                } else {
+                    endQuiz(false); // Quiz finished all questions
+                }
+            }
+
+            function endQuiz(timeUp) {
+                clearInterval(timerInterval);
+                quizGameScreen.classList.add('hidden');
+                quizResultScreen.classList.remove('hidden');
+                finalScoreSpan.textContent = score;
+
+                if (timeUp) {
+                    quizResultScreen.querySelector('p:first-of-type').textContent = '¡Tiempo agotado!';
+                } else {
+                    quizResultScreen.querySelector('p:first-of-type').textContent = '¡Juego Terminado!';
+                }
+            }
+
+            function startQuiz() {
+                quizStartScreen.classList.add('hidden');
+                quizGameScreen.classList.remove('hidden');
+                quizResultScreen.classList.add('hidden');
+                currentQuestionIndex = 0;
+                score = 0;
+                timeLeft = 3 * 60; // Reset timer for 3 minutes
+                updateTimerDisplay();
+                startTimer();
+                displayQuestion();
+            }
+
+            function restartQuiz() {
+                startQuiz();
+            }
+
+            startQuizBtn.addEventListener('click', startQuiz);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            restartQuizBtn.addEventListener('click', restartQuiz);
         });
     </script>
 </body>

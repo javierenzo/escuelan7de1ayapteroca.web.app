@@ -522,6 +522,7 @@
         <a href="https://escuelan7de1ayapteroca.web.app/" target="_blank" class="epa7de1-link">EPA7de1</a> <!-- Added epa7de1-link class -->
         <a href="#video-independencia-title">Video la Independencia Argentina</a>
         <a href="#video-mujeres-title">Video Mujeres de la Independencia</a>
+        <a href="#ia-features-title">Explora con IA</a> <!-- New link for AI features -->
     </nav>
 
     <div class="container">
@@ -822,6 +823,40 @@
                 <iframe src="https://www.youtube.com/embed/DclLpepQcc8" title="Mujeres de la Independencia - Corto con IA de Contando HistorIAs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <p class="text-center text-gray-600 mt-4">Video de Contando HistorIAs.</p>
+        </section>
+
+        <!-- New Section for LLM-powered features -->
+        <section class="section-card">
+            <h2 id="ia-features-title" class="text-2xl mb-4">Explora con Inteligencia Artificial</h2>
+            <p class="mb-4">Utiliza el poder de la IA para descubrir más sobre la independencia argentina.</p>
+
+            <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-semibold mb-3 text-blue-800">✨ Dato Histórico Aleatorio</h3>
+                <p class="mb-4 text-gray-700">Haz clic para generar un dato curioso o poco conocido sobre la Declaración de Independencia de Argentina.</p>
+                <div class="text-center">
+                    <button id="btn-generate-fact" class="btn-primary flex items-center justify-center mx-auto">
+                        <span id="text-generate-fact">Generar Dato</span>
+                        <span id="spinner-generate-fact" class="loading-spinner hidden"></span>
+                    </button>
+                    <p id="generated-fact" class="mt-4 p-3 bg-white border border-gray-300 rounded-md text-gray-800 text-left min-h-[50px] flex items-center justify-center">
+                        Aquí aparecerá un dato histórico.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                <h3 class="text-xl font-semibold mb-3 text-green-800">✨ Estrofa Patriótica</h3>
+                <p class="mb-4 text-gray-700">Genera una estrofa corta de un poema o letra de canción inspirada en el espíritu de la independencia.</p>
+                <div class="text-center">
+                    <button id="btn-generate-poem" class="btn-primary flex items-center justify-center mx-auto">
+                        <span id="text-generate-poem">Generar Estrofa</span>
+                        <span id="spinner-generate-poem" class="loading-spinner hidden"></span>
+                    </button>
+                    <p id="generated-poem" class="mt-4 p-3 bg-white border border-gray-300 rounded-md text-gray-800 text-left min-h-[50px] flex items-center justify-center">
+                        Aquí aparecerá una estrofa patriótica.
+                    </p>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -1433,6 +1468,65 @@
 
             epaLink.addEventListener('mouseout', () => {
                 clearInterval(starInterval);
+            });
+
+            // --- Gemini API Integration Logic ---
+            async function generateTextWithGemini(prompt, displayElementId, spinnerId, buttonTextId) {
+                const displayElement = document.getElementById(displayElementId);
+                const spinner = document.getElementById(spinnerId);
+                const buttonText = document.getElementById(buttonTextId);
+                const button = buttonText.parentElement; // Get the parent button element
+
+                // Show loading state
+                buttonText.textContent = 'Generando...';
+                spinner.classList.remove('hidden');
+                button.disabled = true;
+                displayElement.textContent = 'Cargando...'; // Show loading message in display area
+
+                try {
+                    const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // API key is handled by the environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        displayElement.textContent = text;
+                    } else {
+                        displayElement.textContent = 'Error: No se pudo generar el texto o la respuesta no tiene el formato esperado.';
+                        console.error('Error: Unexpected API response structure or missing content.', result);
+                    }
+                } catch (error) {
+                    displayElement.textContent = 'Error: Falló la conexión con la API de Gemini.';
+                    console.error('Error calling Gemini API:', error);
+                } finally {
+                    // Reset button state
+                    buttonText.textContent = buttonTextId.includes('fact') ? 'Generar Dato' : 'Generar Estrofa';
+                    spinner.classList.add('hidden');
+                    button.disabled = false;
+                }
+            }
+
+            // Event listener for "Generar Dato Histórico" button
+            document.getElementById('btn-generate-fact').addEventListener('click', () => {
+                const prompt = "Genera un dato histórico interesante y poco conocido sobre la Declaración de Independencia de Argentina del 9 de julio de 1816 o los eventos que la rodearon. Sé conciso.";
+                generateTextWithGemini(prompt, 'generated-fact', 'spinner-generate-fact', 'text-generate-fact');
+            });
+
+            // Event listener for "Generar Estrofa Patriótica" button
+            document.getElementById('btn-generate-poem').addEventListener('click', () => {
+                const prompt = "Escribe una estrofa corta de un poema o letra de canción patriótica sobre la Declaración de Independencia de Argentina del 9 de julio de 1816, destacando la libertad y la soberanía. Debe ser inspirador y rimar.";
+                generateTextWithGemini(prompt, 'generated-poem', 'spinner-generate-poem', 'text-generate-poem');
             });
         });
     </script>

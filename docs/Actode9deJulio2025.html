@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaración de Independencia de Argentina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            /* padding-top will be set dynamically by JavaScript */
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        h1, h2 {
+            color: #1a202c; /* Darker text for headings */
+            font-weight: 700;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .section-card {
+            background-color: #f8fafc; /* Lighter background for sections */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue for primary button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .deputy-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .deputy-card img {
+            margin-top: 1rem;
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: fixed; /* Use fixed to cover the whole viewport */
+            width: 10px;
+            height: 10px;
+            background-color: #ff0; /* Default color, will be randomized */
+            opacity: 1; /* Start visible */
+            animation: confetti-fall 3s forwards;
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: 9999; /* Ensure it's on top */
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotateZ(0deg); /* Start from its initial top position */
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(720deg); /* Fall to the bottom of the viewport */
+                opacity: 0; /* Fade out at the end */
+            }
+        }
+
+        /* Timeline styles */
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            width: 2px;
+            background-color: #cbd5e0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-event {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-event:nth-child(odd) {
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .timeline-event:nth-child(even) {
+            flex-direction: row-reverse;
+            justify-content: flex-start; /* Ensure content aligns to the right */
+        }
+
+        .timeline-event-date {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            z-index: 10;
+            text-align: center;
+            min-width: 120px; /* Fixed width for dates */
+        }
+
+        .timeline-event-content {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 0 1rem;
+            flex-grow: 1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .timeline-event-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-event:nth-child(odd) .timeline-event-content {
+            margin-left: calc(50% + 1rem); /* Adjust for line and date */
+            margin-right: 1rem;
+            text-align: left;
+        }
+
+        .timeline-event:nth-child(even) .timeline-event-content {
+            margin-right: calc(50% + 1rem); /* Adjust for line and date */
+            margin-left: 1rem;
+            text-align: right;
+        }
+
+        .timeline-event-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11;
+        }
+
+        .timeline-event:nth-child(odd) .timeline-event-dot {
+            left: calc(50% - 1px); /* Align dot with the line */
+        }
+
+        .timeline-event:nth-child(even) .timeline-event-dot {
+            left: calc(50% - 1px); /* Align dot with the line */
+        }
+
+        @media (max-width: 768px) {
+            .timeline-event {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .timeline-event-date {
+                margin-bottom: 0.5rem;
+                width: auto;
+            }
+            .timeline-event-content {
+                width: 100%;
+                margin: 0;
+            }
+            .timeline-event:nth-child(odd) .timeline-event-content,
+            .timeline-event:nth-child(even) .timeline-event-content {
+                margin-left: 0;
+                margin-right: 0;
+                text-align: left;
+            }
+            .timeline-line {
+                left: 20px; /* Move line to the left for mobile */
+                transform: translateX(0);
+            }
+            .timeline-event-dot {
+                left: 13px; /* Align dot with the new line position */
+                transform: translateX(0);
+            }
+        }
+
+        /* Pulse animation for ¡SÍ, QUEREMOS! */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .si-queremos-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ef4444; /* Red color */
+            animation: pulse 1s infinite alternate; /* Apply pulse animation */
+            margin-top: 1rem;
+            display: none; /* Hidden by default */
+        }
+
+        .hidden-text {
+            display: none; /* Hidden by default */
+        }
+
+        /* New styles for "Viva la Independencia" and "Viva la Patria" */
+        .viva-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #10b981; /* Green color */
+            animation: pulse 1s infinite alternate; /* Reuse pulse animation */
+            margin-top: 1rem;
+            display: none; /* Hidden by default */
+            position: absolute; /* Position relative to the parent section */
+            width: 100%;
+            text-align: center;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        #viva-independencia-text {
+            top: 60%; /* Adjusted position for Viva la Independencia */
+        }
+        #viva-patria-text {
+            color: #f59e0b; /* Amber color */
+            top: 75%; /* Adjusted position for Viva la Patria, positioned lower */
+        }
+
+        /* Scrollytelling styles */
+        .scrolly-container {
+            position: relative;
+            padding: 1rem 0;
+            min-height: 100vh; /* Ensure enough height for scrolling */
+        }
+
+        .scrolly-sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Occupy full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            z-index: 0; /* Behind the steps */
+        }
+
+        .scrolly-step {
+            position: relative;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin: 20vh auto; /* Adjusted margin to reduce space */
+            width: 80%;
+            max-width: 600px;
+            opacity: 0.2; /* Initially faded */
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1; /* Above the sticky content */
+            pointer-events: auto; /* Allow interaction with buttons inside */
+        }
+
+        .scrolly-step.is-active {
+            opacity: 1; /* Fully visible when active */
+        }
+
+        .scrolly-step h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .scrolly-step p {
+            margin-bottom: 1.5rem;
+        }
+
+        .scrolly-image-container {
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        /* New style for figures section within timeline */
+        .figures-section {
+            margin-top: 4rem; /* Add some space above the figures */
+            width: 100%; /* Ensure it takes full width */
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a202c; /* Dark background for navbar */
+            padding: 0.5rem 0;
+            z-index: 100; /* Ensure it stays on top */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: center; /* Center the links */
+            flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+        }
+        .navbar a {
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            font-weight: 400;
+            margin: 0 0.25rem; /* Space between links */
+            white-space: nowrap; /* Prevent text wrapping within a link */
+        }
+        .navbar a:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+        }
+
+        /* Scroll margin for anchor targets */
+        h2[id], h3[id] {
+            scroll-margin-top: var(--navbar-height, 0px); /* Default to 0 if not set by JS */
+        }
+
+        /* Responsive video container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; /* Stack links vertically on small screens */
+                align-items: center;
+            }
+            .navbar a {
+                width: 90%; /* Make links take more width on small screens */
+                text-align: center;
+                margin-bottom: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body id="top"> <!-- Added id="top" to the body tag -->
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="mainNavbar">
+        <a href="#top">Inicio</a>
+        <a href="#declaracion-title">Declaración</a>
+        <a href="#antecedentes-title">Antecedentes</a>
+        <a href="#camino-independencia-title">Camino a la Independencia</a>
+        <a href="#figuras-clave-title">Figuras Clave</a>
+        <a href="#linea-tiempo-title">Línea de Tiempo</a>
+        <a href="#congreso-tucuman-title">Congreso de Tucumán</a>
+        <a href="#acta-independencia-title">Acta de Independencia</a>
+        <a href="#firmantes-title">Firmantes</a>
+        <a href="#diputados-firmantes-title">Diputados Firmantes</a>
+        <a href="#momento-decisivo-title">Momento Decisivo</a>
+        <a href="#legado-title">Legado</a>
+        <a href="#celebracion-title">Celebración</a>
+        <a href="#celebra-independencia-title">¡Celebra!</a>
+        <a href="#video-independencia-title">Video la Independencia Argentina</a>
+        <a href="#video-mujeres-title">Video Mujeres de la Independencia</a>
+    </nav>
+
+    <div class="container">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl mb-2">Declaración de Independencia de Argentina</h1>
+            <p class="text-lg text-gray-600">Un hito fundamental en la historia de la nación.</p>
+        </header>
+
+        <section class="section-card">
+            <h2 id="declaracion-title" class="text-2xl mb-4">Declaración de Independencia de la Argentina 9 de julio 1816</h2>
+            <p>El 9 de julio de 1816, en la ciudad de San Miguel de Tucumán, el Congreso de las Provincias Unidas del Río de la Plata declaró formalmente la independencia de España. Este acto trascendental marcó el nacimiento de Argentina como nación soberana, culminando un largo proceso de luchas y debates.</p>
+            <p>La declaración no solo proclamó la ruptura con la metrópoli, sino que también sentó las bases para la organización política y social del nuevo estado. Fue un momento de profunda significación, que unió a diversas provincias en un objetivo común de libertad y autodeterminación.</p>
+            <div class="text-center mt-6">
+                <button id="btn-declaracion" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-declaracion">Generar Imagen Histórica</span>
+                    <span id="spinner-declaracion" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-declaracion" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-declaracion" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="antecedentes-title" class="text-2xl mb-4">Antecedentes</h2>
+            <p>Los antecedentes de la declaración de independencia se remontan a las Invasiones Inglesas de 1806 y 1807, que demostraron la debilidad de la autoridad española y fortalecieron el sentimiento de autogobierno en la región. La Revolución de Mayo de 1810 fue el punto de partida, estableciendo la Primera Junta de Gobierno y dando inicio al proceso revolucionario.</p>
+            <p>A esto se sumaron las ideas de la Ilustración y las revoluciones francesa y estadounidense, que inspiraron a los líderes criollos a buscar la emancipación. La situación en Europa, con la invasión napoleónica a España, también creó un vacío de poder que fue aprovechado por las colonias americanas.</p>
+            <div class="text-center mt-6">
+                <button id="btn-antecedentes" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-antecedentes">Generar Imagen de Antecedentes</span>
+                    <span id="spinner-antecedentes" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-antecedentes" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-antecedentes" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="camino-independencia-title" class="text-2xl mb-4">El Camino a la Independencia</h2>
+            <p>El período entre la Revolución de Mayo de 1810 y la Declaración de Independencia en 1816 fue un camino arduo y lleno de desafíos para las Provincias Unidas del Río de la Plata. Tras la formación de la Primera Junta, se sucedieron diversos gobiernos (Junta Grande, Primer Triunvirato, Segundo Triunvirato, Directorio Supremo) que buscaron consolidar la autonomía y enfrentar la resistencia realista. Asimismo, se realizaron intentos de organización política, como la Asamblea del Año XIII, que si bien no declaró la independencia formalmente, sentó precedentes importantes al eliminar símbolos monárquicos y proclamar la libertad de vientres.</p>
+
+            <div class="text-center mt-6">
+                <button id="btn-camino" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-camino">Generar Imagen del Camino a la Independencia</span>
+                    <span id="spinner-camino" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-camino" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-camino" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+
+            <!-- Figuras Clave del Camino a la Independencia -->
+            <div class="figures-section">
+                <h3 id="figuras-clave-title" class="text-xl mt-8 mb-4 font-semibold">Figuras Clave del Camino a la Independencia:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="text-center">
+                        <button id="btn-manuel-belgrano" class="btn-primary flex items-center justify-center mx-auto">
+                            <span id="text-manuel-belgrano">Generar Imagen de Manuel Belgrano</span>
+                            <span id="spinner-manuel-belgrano" class="loading-spinner hidden"></span>
+                        </button>
+                        <div id="container-manuel-belgrano" class="mt-4 p-2 bg-gray-100 rounded-lg flex justify-center items-center min-h-[150px]">
+                            <img id="img-manuel-belgrano" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+aquí" alt="Imagen de Manuel Belgrano" class="max-w-full h-auto rounded-md shadow-sm">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button id="btn-jose-de-san-martin" class="btn-primary flex items-center justify-center mx-auto">
+                            <span id="text-jose-de-san-martin">Generar Imagen de José de San Martín</span>
+                            <span id="spinner-jose-de-san-martin" class="loading-spinner hidden"></span>
+                        </button>
+                        <div id="container-jose-de-san-martin" class="mt-4 p-2 bg-gray-100 rounded-lg flex justify-center items-center min-h-[150px]">
+                            <img id="img-jose-de-san-martin" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+aquí" alt="Imagen de José de San Martín" class="max-w-full h-auto rounded-md shadow-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="linea-tiempo-title" class="text-xl mt-4 mb-2 font-semibold">Línea de Tiempo (1810-1816):</h3>
+            <div id="timeline" class="timeline-container">
+                <div class="timeline-line"></div>
+                <!-- Aquí se renderizarán los eventos de la línea de tiempo -->
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="congreso-tucuman-title" class="text-2xl mb-4">El Congreso de Tucumán</h2>
+            <p>El Congreso de Tucumán fue convocado en 1816 con el objetivo principal de declarar la independencia y establecer una forma de gobierno para las Provincias Unidas. Se reunió en la Casa Histórica de Tucumán, con representantes de diversas provincias, en un contexto de guerra contra los realistas.</p>
+            <p>Las sesiones del Congreso fueron intensas, con debates sobre la forma de gobierno (monarquía o república) y la necesidad de una declaración formal de independencia que pusiera fin a la ambigüedad de la situación política.</p>
+            <div class="text-center mt-6">
+                <button id="btn-congreso" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-congreso">Generar Imagen del Congreso</span>
+                    <span id="spinner-congreso" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-congreso" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-congreso" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="acta-independencia-title" class="text-2xl mb-4">Acta de la Independencia</h2>
+            <p>El Acta de la Independencia fue redactada y firmada el 9 de julio de 1816. En ella se proclamaba que las Provincias Unidas del Río de la Plata "son por de hecho y de derecho una nación libre e independiente de los reyes de España y su metrópoli, y de toda otra dominación extranjera".</p>
+            <p>Este documento histórico es el pilar fundamental de la soberanía argentina y un símbolo de la voluntad de su pueblo de forjar su propio destino.</p>
+            <div class="text-center mt-6">
+                <button id="btn-acta" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-acta">Generar Imagen del Acta</span>
+                    <span id="spinner-acta" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-acta" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-acta" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="firmantes-title" class="text-2xl mb-4">Firmantes de la Declaración de la Independencia</h2>
+            <p>Entre los firmantes del Acta de la Independencia se encontraban figuras prominentes de la época, representando a las distintas provincias. Estos hombres, con su valentía y visión, sellaron el destino de la nueva nación.</p>
+
+            <div class="text-center mt-6">
+                <button id="btn-firmantes-general" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-firmantes-general">Generar Imagen de los Firmantes</span>
+                    <span id="spinner-firmantes-general" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-firmantes-general" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-firmantes-general" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+General+Generada+Aquí" alt="Imagen general de firmantes" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+
+            <h3 id="diputados-firmantes-title" class="text-xl mt-4 mb-2 font-semibold">Los 29 Diputados Firmantes:</h3>
+            <div id="deputiesListContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="momento-decisivo-title" class="text-2xl mb-4">El Momento Decisivo: 9 de Julio</h2>
+            <p>El 9 de julio de 1816 representa el culmen de años de lucha y aspiraciones independentistas. En la Casa Histórica de Tucumán, los diputados del Congreso de las Provincias Unidas del Río de la Plata tomaron la valiente decisión de declarar la independencia de la corona española y de toda otra dominación extranjera. Este acto no solo fue una proclamación formal, sino un compromiso inquebrantable con la soberanía y la autodeterminación de la nueva nación, sentando las bases para la Argentina que conocemos hoy.</p>
+            <div class="text-center mt-6">
+                <button id="btn-momento-decisivo" class="btn-primary flex items-center justify-center mx-auto mb-4">
+                    <span id="text-momento-decisivo">Generar Imagen del Momento Decisivo</span>
+                    <span id="spinner-momento-decisivo" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-momento-decisivo" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-momento-decisivo" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen del momento decisivo" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+            <p class="text-center text-lg font-semibold mt-4 mb-4">
+                Fue Francisco Narciso de Laprida, presidente del Congreso, preguntó:
+                <br>
+                "¿Quieren que las Provincias Unidas sean una nación libre e independiente de los reyes de España y su metrópoli?"
+            </p>
+            <div class="text-center mt-4">
+                <button id="btn-declarar-independencia" class="btn-primary flex items-center justify-center mx-auto mb-4">
+                    Declarar la Independencia
+                </button>
+                <p class="mt-2 text-gray-700">Veces declarado: <span id="declarar-independencia-count" class="font-bold text-blue-600">0</span></p>
+                <div id="si-queremos-result" class="si-queremos-text">¡SÍ, QUEREMOS!</div>
+                <p id="unanimous-cry-text" class="mt-4 mb-4 hidden-text">Con ese grito unánime, se declaró formalmente la independencia. El Acta de la Independencia Argentina nacía, rompiendo los lazos con la corona española y proclamando al mundo una nueva nación: las Provincias Unidas en Sud América.</p>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="legado-title" class="text-2xl mb-4">El Legado del 9 de Julio</h2>
+            <p>La Declaración de Independencia del 9 de julio de 1816 no fue solo un acto político, sino el cimiento sobre el cual se construyó la identidad y la soberanía de Argentina. Este legado se manifiesta en la constante búsqueda de autodeterminación y en la defensa de los valores republicanos que inspiraron a los próceres. El 9 de julio es un recordatorio de que la libertad y la independencia son conquistas que requieren compromiso y unidad, y su espíritu sigue vivo en cada generación de argentinos.</p>
+
+            <div class="scrolly-container">
+                <div class="scrolly-sticky">
+                    <div id="scrolly-main-content" class="text-center text-2xl font-bold text-gray-700">
+                        <!-- Content will be updated by JS -->
+                        Desplázate para explorar el Legado
+                    </div>
+                </div>
+
+                <div id="scrolly-steps-container">
+                    <div class="scrolly-step" data-step="0">
+                        <h3>Acto Fundacional</h3>
+                        <p>La declaración de independencia fue el acto fundacional de la Argentina como nación soberana, marcando el inicio de su camino hacia la autodeterminación.</p>
+                        <div class="text-center mt-4">
+                            <button id="btn-acto-fundacional" class="btn-primary flex items-center justify-center mx-auto">
+                                <span id="text-acto-fundacional">Generar Imagen</span>
+                                <span id="spinner-acto-fundacional" class="loading-spinner hidden"></span>
+                            </button>
+                            <div id="container-acto-fundacional" class="scrolly-image-container">
+                                <img id="img-acto-fundacional" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+Aquí" alt="Imagen del Acto Fundacional" class="max-w-full h-auto rounded-md shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scrolly-step" data-step="1">
+                        <h3>Voluntad Popular</h3>
+                        <p>El grito unánime de "¡SÍ, QUEREMOS!" en el Congreso de Tucumán simbolizó la voluntad popular de un pueblo que anhelaba su libertad y su propio destino.</p>
+                        <div class="text-center mt-4">
+                            <button id="btn-voluntad-popular" class="btn-primary flex items-center justify-center mx-auto">
+                                <span id="text-voluntad-popular">Generar Imagen</span>
+                                <span id="spinner-voluntad-popular" class="loading-spinner hidden"></span>
+                            </button>
+                            <div id="container-voluntad-popular" class="scrolly-image-container">
+                                <img id="img-voluntad-popular" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+Aquí" alt="Imagen de Voluntad Popular" class="max-w-full h-auto rounded-md shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scrolly-step" data-step="2">
+                        <h3>Identidad Nacional</h3>
+                        <p>La independencia forjó la identidad nacional argentina, consolidando los valores de soberanía, libertad y autodeterminación que perduran hasta nuestros días.</p>
+                        <div class="text-center mt-4">
+                            <button id="btn-identidad-nacional" class="btn-primary flex items-center justify-center mx-auto">
+                                <span id="text-identidad-nacional">Generar Imagen</span>
+                                <span id="spinner-identidad-nacional" class="loading-spinner hidden"></span>
+                            </button>
+                            <div id="container-identidad-nacional" class="scrolly-image-container">
+                                <img id="img-identidad-nacional" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+Aquí" alt="Imagen de Identidad Nacional" class="max-w-full h-auto rounded-md shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón y contenedor de imagen adicional para el legado general -->
+            <div class="text-center mt-6">
+                <button id="btn-legado-adicional" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-legado-adicional">Generar Imagen Adicional del Legado</span>
+                    <span id="spinner-legado-adicional" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-legado-adicional" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-legado-adicional" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen adicional del legado" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2 id="celebracion-title" class="text-2xl mb-4">Celebración oficial del 9 de julio</h2>
+            <p>El 9 de julio es una de las fechas patrias más importantes de Argentina, celebrada en todo el país con desfiles, actos cívicos y diversas manifestaciones culturales. Es un día para recordar el coraje de los próceres y reafirmar el compromiso con los valores de libertad y soberanía.</p>
+            <p>Las celebraciones suelen incluir la entonación del Himno Nacional, discursos conmemorativos y actividades que resaltan la identidad y la historia argentina.</p>
+            <div class="text-center mt-6">
+                <button id="btn-celebracion" class="btn-primary flex items-center justify-center mx-auto">
+                    <span id="text-celebracion">Generar Imagen de Celebración</span>
+                    <span id="spinner-celebracion" class="loading-spinner hidden"></span>
+                </button>
+                <div id="container-celebracion" class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-center items-center min-h-[200px]">
+                    <img id="img-celebracion" src="https://placehold.co/400x300/e0e0e0/000000?text=Imagen+Generada+Aquí" alt="Imagen generada" class="max-w-full h-auto rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card text-center mt-8" style="position: relative; padding-bottom: 12rem;">
+            <h2 id="celebra-independencia-title" class="text-2xl mb-4">¡Celebra la Independencia!</h2>
+            <p>Haz clic en el botón para lanzar confeti y celebrar este día histórico.</p>
+            <button id="confettiBtn" class="btn-primary mt-4">Lanzar Confeti</button>
+            <p class="mt-2 text-gray-700">Veces lanzado: <span id="confettiCount" class="font-bold text-blue-600">0</span></p>
+            <!-- New elements for "Viva la Independencia" and "Viva la Patria" -->
+            <div id="viva-independencia-text" class="viva-text">¡Viva la Independencia!</div>
+            <div id="viva-patria-text" class="viva-text viva-patria-text">¡Viva la Patria!</div>
+        </section>
+
+        <!-- Section for the first YouTube video -->
+        <section class="section-card">
+            <h2 id="video-independencia-title" class="text-2xl mb-4">Video: La Independencia Argentina en 7 minutos</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Eg7NKSSbBPc" title="La Independencia Argentina en 7 minutos por Faro de Zeus" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p class="text-center text-gray-600 mt-4">Video de Faro de Zeus.</p>
+        </section>
+
+        <!-- New section for the second YouTube video -->
+        <section class="section-card">
+            <h2 id="video-mujeres-title" class="text-2xl mb-4">Video: Mujeres de la Independencia - Corto con IA</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/DclLpepQcc8" title="Mujeres de la Independencia - Corto con IA de Contando HistorIAs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p class="text-center text-gray-600 mt-4">Video de Contando HistorIAs.</p>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to dynamically set body padding-top based on navbar height
+            function adjustBodyPaddingAndScrollMargin() {
+                const navbar = document.getElementById('mainNavbar');
+                if (navbar) {
+                    const navbarHeight = navbar.offsetHeight;
+                    document.body.style.paddingTop = navbarHeight + 'px';
+                    document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
+                }
+            }
+
+            // Call adjustBodyPaddingAndScrollMargin on load and resize
+            adjustBodyPaddingAndScrollMargin();
+            window.addEventListener('resize', adjustBodyPaddingAndScrollMargin);
+
+            // Function to handle image generation for a specific section
+            async function generateImageForSection(prompt, buttonId, imageId, spinnerId, buttonTextId) {
+                const generateBtn = document.getElementById(buttonId);
+                const generatedImg = document.getElementById(imageId);
+                const loadingSpn = document.getElementById(spinnerId);
+                const btnText = document.getElementById(buttonTextId);
+
+                // Show loading state
+                btnText.textContent = 'Generando...';
+                loadingSpn.classList.remove('hidden');
+                generateBtn.disabled = true;
+                generatedImg.src = "https://placehold.co/400x300/e0e0e0/000000?text=Generando+Imagen..."; // Temporary placeholder
+
+                try {
+                    const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1} };
+                    const apiKey = ""; // API key is handled by the environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                        const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                        generatedImg.src = imageUrl;
+                        generatedImg.alt = "Imagen generada";
+                    } else {
+                        console.error('Error: No se pudo generar la imagen o la respuesta no tiene el formato esperado.');
+                        generatedImg.src = "https://placehold.co/400x300/ff0000/ffffff?text=Error+al+Generar";
+                        generatedImg.alt = "Error al generar la imagen";
+                    }
+                } catch (error) {
+                    console.error('Error al llamar a la API de generación de imágenes:', error);
+                    generatedImg.src = "https://placehold.co/400x300/ff0000/ffffff?text=Error+de+Conexión";
+                    generatedImg.alt = "Error de conexión";
+                    } finally {
+                    // Reset button state
+                    btnText.textContent = 'Generar Imagen'; // Default text
+                    loadingSpn.classList.add('hidden');
+                    generateBtn.disabled = false;
+                }
+            }
+
+            // Define prompts for each section
+            const prompts = {
+                declaracion: "A historical painting depicting the signing of the Argentine Declaration of Independence on July 9, 1816, in Tucumán, with delegates in period attire, a quill, and an important document on a table. The scene should convey solemnity and historical significance, with a classic art style.",
+                antecedentes: "A historical painting depicting the events leading up to Argentina's independence, such as the English Invasions of 1806-1807 or the May Revolution of 1810, showing a crowd in Buenos Aires.",
+                camino: "A historical painting illustrating the key political and military events of Argentina's path to independence between 1810 and 1816, showing figures like Manuel Belgrano and José de San Martín, and different governing bodies and battles.", // Updated prompt for timeline
+                congreso: "A historical painting of the Congress of Tucumán in 1816, showing delegates debating inside the historic Casa Histórica de Tucumán, with period furniture and lighting.",
+                acta: "A close-up historical image of the original Argentine Act of Independence document with quills and ink, conveying its historical significance and aged texture.",
+                firmantes_general: "A group portrait of the 29 signatories of the Argentine Declaration of Independence from 1816, depicting them in a formal assembly, classic painting style.",
+                momento_decisivo: "A historical painting capturing the solemn and pivotal moment of the declaration of Argentina's independence on July 9, 1816, in the Casa Histórica de Tucumán, with delegates signing the act.",
+                acto_fundacional: "A historical painting depicting the signing of the Argentine Declaration of Independence on July 9, 1816, in Tucumán, emphasizing the foundational aspect, classic art style.",
+                voluntad_popular: "A vibrant historical painting showing the Argentine people celebrating independence, with flags and a sense of popular will and unity, in a classic art style.",
+                identidad_nacional: "A symbolic image representing Argentina's national identity, blending historical elements like the flag and national symbols with modern Argentine culture, in an artistic and patriotic style.",
+                legado_adicional: "A symbolic and abstract image representing the enduring legacy of Argentina's independence, incorporating elements of freedom, national pride, and historical continuity, in a modern artistic style.", // Nuevo prompt
+                celebracion: "A vibrant scene of a modern-day official celebration of Argentina's Independence Day on July 9th, with people waving Argentine flags, traditional dances, and festive decorations in a public square.",
+                manuel_belgrano: "A portrait of Manuel Belgrano, an Argentine general and statesman who created the Flag of Argentina, in a historical painting style.",
+                jose_de_san_martin: "A portrait of José de San Martín, an Argentine general and the prime leader of the southern and central parts of South America's successful struggle for independence from the Spanish Empire, in a historical painting style."
+            };
+
+            // Data for the 29 deputies
+            const deputies = [
+                { name: "Francisco Narciso de Laprida", province: "San Juan", role: "Presidente", id: "lapridia", prompt: "Portrait of Francisco Narciso de Laprido, president of the Congress of Tucumán, in 19th-century Argentine attire, solemn expression, classic painting style." },
+                { name: "Mariano Boedo", province: "Salta", role: "Vicepresidente", id: "boedo", prompt: "Portrait of Mariano Boedo, vice-president of the Congress of Tucumán, in 19th-century Argentine attire, serious expression, classic painting style." },
+                { name: "José Mariano Serrano", province: "Charcas", role: "Secretario", id: "serrano", prompt: "Portrait of José Mariano Serrano, secretary of the Congress of Tucumán, in 19th-century Argentine attire, scholarly appearance, classic painting style." },
+                { name: "Juan José Paso", province: "Buenos Aires", id: "paso", prompt: "Portrait of Juan José Paso, secretary of the Congress of Tucumán, in 19-century Argentine attire, intellectual look, classic painting style." },
+                { name: "Dr. Antonio Sáenz", province: "Buenos Aires", id: "saenz", prompt: "Portrait of Dr. Antonio Sáenz, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Darragueira", province: "Buenos Aires", id: "darragueira", prompt: "Portrait of Dr. José Darragueira, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Fray Cayetano José Rodríguez", province: "Buenos Aires", id: "rodriguez", prompt: "Portrait of Fray Cayetano José Rodríguez, a friar and signatory of the Argentine Declaration of Independence, in clerical attire, classic painting style." },
+                { name: "Dr. Pedro Medrano", province: "Buenos Aires", id: "medrano", prompt: "Portrait of Dr. Pedro Medrano, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Esteban Agustín Gascón", province: "Buenos Aires", id: "gascon", prompt: "Portrait of Dr. Esteban Agustín Gascón, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Tomás Manuel de Anchorena", province: "Buenos Aires", id: "anchorena", prompt: "Portrait of Dr. Tomás Manuel de Anchorena, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Manuel Antonio Acevedo", province: "Catamarca", id: "acevedo", prompt: "Portrait of Dr. Manuel Antonio Acevedo, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Eusebio Colombres", province: "Catamarca", id: "colombres", prompt: "Portrait of Dr. José Eusebio Colombres, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Eduardo Pérez Bulnes", province: "Córdoba", id: "perezbulnes", prompt: "Portrait of Eduardo Pérez Bulnes, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "José Antonio Cabrera", province: "Córdoba", id: "cabrera", prompt: "Portrait of José Antonio Cabrera, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Lic. Jerónimo Salguero de Cabrera y Cabrera", province: "Córdoba", id: "salguero", prompt: "Portrait of Lic. Jerónimo Salguero de Cabrera y Cabrera, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Teodoro Sánchez de Bustamante", province: "Jujuy", id: "bustamante", prompt: "Portrait of Dr. Teodoro Sánchez de Bustamante, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Pedro Ignacio de Castro Barros", province: "La Rioja", id: "castrobarros", prompt: "Portrait of Dr. Pedro Ignacio de Castro Barros, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Tomás Godoy Cruz", province: "Mendoza", id: "godoycruz", prompt: "Portrait of Tomás Godoy Cruz, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Juan Agustín Maza", province: "Mendoza", id: "maza", prompt: "Portrait of Dr. Juan Agustín Maza, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Pedro Ignacio Rivera", province: "Mizque", id: "rivera", prompt: "Portrait of Pedro Ignacio Rivera, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Ignacio de Gorriti", province: "Salta", id: "gorriti", prompt: "Portrait of Dr. José Ignacio de Gorriti, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Fray Justo Santa María de Oro", province: "San Juan", id: "santamariadeoro", prompt: "Portrait of Fray Justo Santa María de Oro, a friar and signatory of the Argentine Declaration of Independence, in clerical attire, classic painting style." },
+                { name: "Pedro Francisco de Uriarte", province: "Santiago del Estero", id: "uriarte", prompt: "Portrait of Pedro Francisco de Uriarte, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Pedro León Gallo", province: "Santiago del Estero", id: "gallo", prompt: "Portrait of Pedro León Gallo, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Pedro Miguel Aráoz", province: "Tucumán", id: "araoz", prompt: "Portrait of Dr. Pedro Miguel Aráoz, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Ignacio Thames", province: "Tucumán", id: "thames", prompt: "Portrait of Dr. José Ignacio Thames, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. Mariano Sánchez de Loria", province: "Charcas", id: "sanchezdeloria", prompt: "Portrait of Dr. Mariano Sánchez de Loria, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Severo Malabia", province: "Charcas", id: "malabia", prompt: "Portrait of Dr. José Severo Malabia, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." },
+                { name: "Dr. José Andrés Pacheco de Melo", province: "Chichas", id: "pachecodemelo", prompt: "Portrait of Dr. José Andrés Pacheco de Melo, a signatory of the Argentine Declaration of Independence, in 19th-century Argentine attire, classic painting style." }
+            ];
+
+            // Data for the interactive timeline
+            const timelineEvents = [
+                { date: "25 de Mayo de 1810", title: "Revolución de Mayo", description: "Creación de la Primera Junta de Gobierno.", prompt: "A historical painting depicting the May Revolution of 1810 in Buenos Aires, with a crowd in front of the Cabildo, showing the beginning of the independence movement." },
+                { date: "1811", title: "Junta Grande y Primer Triunvirato", description: "Creación de la Junta Grande y posterior Primer Triunvirato.", prompt: "A historical painting illustrating the formation of the Junta Grande and the First Triumvirate in Argentina, showing political figures debating in a room." },
+                { date: "1812", title: "Segundo Triunvirato y Batalla de Tucumán", description: "Creación del Segundo Triunvirato. Batalla de Tucumán (victoria patriota).", prompt: "A historical painting depicting the Battle of Tucumán in 1812, with Manuel Belgrano leading the patriot forces to victory against the royalists." },
+                { date: "1813", title: "Asamblea del Año XIII", description: "Abolición de títulos de nobleza, libertad de vientres, adopción del Himno Nacional.", prompt: "A historical painting of the Assembly of the Year XIII, showing delegates in a legislative setting, with symbols of sovereignty and the new national anthem being adopted." },
+                { date: "1814", title: "Directorio Supremo", description: "Creación del Directorio Supremo.", prompt: "A historical painting depicting the establishment of the Supreme Directorate in 1814, showing the political leaders of the time." },
+                { date: "1815", title: "Batalla de Sipe-Sipe", description: "Batalla de Sipe-Sipe (derrota patriota en el Alto Perú).", prompt: "A historical painting illustrating the Battle of Sipe-Sipe in 1815, showing the defeat of the patriot forces in Upper Peru, conveying the challenges of the independence struggle." },
+                { date: "9 de Julio de 1816", title: "Declaración de la Independencia", description: "Declaración de la Independencia en el Congreso de Tucumán.", prompt: "A historical painting depicting the signing of the Argentine Declaration of Independence on July 9, 1816, in Tucumán, with delegates in period attire, a quill, and an important document on a table. The scene should convey solemnity and historical significance, with a classic art style." }
+            ];
+
+            // Get the container for deputies
+            const deputiesListContainer = document.getElementById('deputiesListContainer');
+
+            // Loop through deputies data to create HTML elements and attach event listeners
+            deputies.forEach(deputy => {
+                const deputyCard = document.createElement('div');
+                deputyCard.className = 'deputy-card'; // Tailwind classes for styling
+
+                deputyCard.innerHTML = `
+                    <h4 class="text-lg font-semibold">${deputy.name}</h4>
+                    <p class="text-gray-600">${deputy.province} ${deputy.role ? `(${deputy.role})` : ''}</p>
+                    <button id="btn-diputado-${deputy.id}" class="btn-primary flex items-center justify-center mx-auto mt-4">
+                        <span id="text-diputado-${deputy.id}">Generar Imagen</span>
+                        <span id="spinner-diputado-${deputy.id}" class="loading-spinner hidden"></span>
+                    </button>
+                    <div id="container-diputado-${deputy.id}" class="mt-4 p-2 bg-gray-50 rounded-lg flex justify-center items-center min-h-[150px] w-full">
+                        <img id="img-diputado-${deputy.id}" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+Aquí" alt="Imagen de ${deputy.name}" class="max-w-full h-auto rounded-md shadow-sm">
+                    </div>
+                `;
+                deputiesListContainer.appendChild(deputyCard);
+
+                // Attach event listener for each deputy's button
+                document.getElementById(`btn-diputado-${deputy.id}`).addEventListener('click', () => {
+                    generateImageForSection(
+                        deputy.prompt,
+                        `btn-diputado-${deputy.id}`,
+                        `img-diputado-${deputy.id}`,
+                        `spinner-diputado-${deputy.id}`,
+                        `text-diputado-${deputy.id}`
+                    );
+                });
+            });
+
+            // Function to render the interactive timeline
+            function renderTimeline() {
+                const timelineContainer = document.getElementById('timeline');
+                // Clear existing timeline events before rendering to prevent duplicates on re-render
+                timelineContainer.querySelectorAll('.timeline-event').forEach(event => event.remove());
+
+                timelineEvents.forEach((event, index) => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'timeline-event';
+                    // Unique IDs for each timeline event's button, image, and spinner
+                    const eventButtonId = `btn-timeline-${index}`;
+                    const eventImageId = `img-timeline-${index}`;
+                    const eventSpinnerId = `spinner-timeline-${index}`;
+                    const eventButtonTextId = `text-timeline-${index}`;
+
+                    eventDiv.innerHTML = `
+                        <div class="timeline-event-date">${event.date}</div>
+                        <div class="timeline-event-dot"></div>
+                        <div class="timeline-event-content">
+                            <h4 class="text-lg font-semibold mb-1">${event.title}</h4>
+                            <p class="text-sm text-gray-700">${event.description}</p>
+                            <div class="text-center mt-4">
+                                <button id="${eventButtonId}" class="btn-primary flex items-center justify-center mx-auto">
+                                    <span id="${eventButtonTextId}">Generar Imagen</span>
+                                    <span id="${eventSpinnerId}" class="loading-spinner hidden"></span>
+                                </button>
+                                <div id="container-${eventImageId}" class="mt-4 p-2 bg-gray-50 rounded-lg flex justify-center items-center min-h-[150px] w-full">
+                                    <img id="${eventImageId}" src="https://placehold.co/200x150/e0e0e0/000000?text=Imagen+Aquí" alt="Imagen de ${event.title}" class="max-w-full h-auto rounded-md shadow-sm">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    timelineContainer.appendChild(eventDiv); // Append to the end of the timeline container
+                });
+            }
+
+            // Call renderTimeline on DOMContentLoaded
+            renderTimeline();
+
+            // Attach event listeners for the main section buttons
+            document.getElementById('btn-declaracion').addEventListener('click', () => {
+                generateImageForSection(prompts.declaracion, 'btn-declaracion', 'img-declaracion', 'spinner-declaracion', 'text-declaracion');
+            });
+
+            document.getElementById('btn-antecedentes').addEventListener('click', () => {
+                generateImageForSection(prompts.antecedentes, 'btn-antecedentes', 'img-antecedentes', 'spinner-antecedentes', 'text-antecedentes');
+            });
+
+            // New section event listener (for the main "Camino a la Independencia" image, not individual timeline events)
+            document.getElementById('btn-camino').addEventListener('click', () => {
+                generateImageForSection(prompts.camino, 'btn-camino', 'img-camino', 'spinner-camino', 'text-camino');
+            });
+
+            document.getElementById('btn-congreso').addEventListener('click', () => {
+                generateImageForSection(prompts.congreso, 'btn-congreso', 'img-congreso', 'spinner-congreso', 'text-congreso');
+            });
+
+            document.getElementById('btn-acta').addEventListener('click', () => {
+                generateImageForSection(prompts.acta, 'btn-acta', 'img-acta', 'spinner-acta', 'text-acta');
+            });
+
+            document.getElementById('btn-firmantes-general').addEventListener('click', () => {
+                generateImageForSection(prompts.firmantes_general, 'btn-firmantes-general', 'img-firmantes-general', 'spinner-firmantes-general', 'text-firmantes-general');
+            });
+
+            // Event listener for the "El Momento Decisivo: 9 de Julio" section's image generation button
+            document.getElementById('btn-momento-decisivo').addEventListener('click', () => {
+                generateImageForSection(prompts.momento_decisivo, 'btn-momento-decisivo', 'img-momento-decisivo', 'spinner-momento-decisivo', 'text-momento-decisivo');
+            });
+
+            // Scrollytelling logic
+            const scrollySteps = document.querySelectorAll('.scrolly-step');
+            const scrollyMainContent = document.getElementById('scrolly-main-content');
+
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.5 // Trigger when 50% of the item is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add active class to the current step
+                        scrollySteps.forEach(step => step.classList.remove('is-active'));
+                        entry.target.classList.add('is-active');
+
+                        // Update main content based on the active step
+                        const stepIndex = parseInt(entry.target.dataset.step);
+                        let content = '';
+                        switch (stepIndex) {
+                            case 0:
+                                content = 'El Acto Fundacional';
+                                break;
+                            case 1:
+                                content = 'La Voluntad Popular';
+                                break;
+                            case 2:
+                                content = 'La Identidad Nacional';
+                                break;
+                            default:
+                                content = 'Desplázate para explorar el Legado';
+                        }
+                        scrollyMainContent.textContent = content;
+                    }
+                });
+            }, observerOptions);
+
+            scrollySteps.forEach(step => {
+                observer.observe(step);
+            });
+
+            // Attach event listeners for scrollytelling image generation buttons
+            document.getElementById('btn-acto-fundacional').addEventListener('click', () => {
+                generateImageForSection(prompts.acto_fundacional, 'btn-acto-fundacional', 'img-acto-fundacional', 'spinner-acto-fundacional', 'text-acto-fundacional');
+            });
+
+            document.getElementById('btn-voluntad-popular').addEventListener('click', () => {
+                generateImageForSection(prompts.voluntad_popular, 'btn-voluntad-popular', 'img-voluntad-popular', 'spinner-voluntad-popular', 'text-voluntad-popular');
+            });
+
+            document.getElementById('btn-identidad-nacional').addEventListener('click', () => {
+                generateImageForSection(prompts.identidad_nacional, 'btn-identidad-nacional', 'img-identidad-nacional', 'spinner-identidad-nacional', 'text-identidad-nacional');
+            });
+
+            // Event listener for the new "legado adicional" button
+            document.getElementById('btn-legado-adicional').addEventListener('click', () => {
+                generateImageForSection(prompts.legado_adicional, 'btn-legado-adicional', 'img-legado-adicional', 'spinner-legado-adicional', 'text-legado-adicional');
+            });
+
+            // Event listeners for the new "Figuras Clave" buttons
+            document.getElementById('btn-manuel-belgrano').addEventListener('click', () => {
+                generateImageForSection(prompts.manuel_belgrano, 'btn-manuel-belgrano', 'img-manuel-belgrano', 'spinner-manuel-belgrano', 'text-manuel-belgrano');
+            });
+
+            document.getElementById('btn-jose-de-san-martin').addEventListener('click', () => {
+                generateImageForSection(prompts.jose_de_san_martin, 'btn-jose-de-san-martin', 'img-jose-de-san-martin', 'spinner-jose-de-san-martin', 'text-jose-de-san-martin');
+            });
+
+            // Get the "Declarar la Independencia" button and the "¡SÍ, QUEREMOS!" text element
+            const declararIndependenciaBtn = document.getElementById('btn-declarar-independencia');
+            const siQueremosResult = document.getElementById('si-queremos-result');
+            const unanimousCryText = document.getElementById('unanimous-cry-text'); // Get the new paragraph element
+            const declararIndependenciaCount = document.getElementById('declarar-independencia-count'); // Get the new count span
+            let declaracionCount = 0; // Initialize counter for "Declarar la Independencia" button
+
+            // Confetti logic (existing)
+            const confettiCountSpan = document.getElementById('confettiCount');
+            let confettiLaunchCount = 0; // Initialize counter
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f']; // Confetti colors
+
+            // New text elements for "Viva la Independencia" and "Viva la Patria"
+            const vivaIndependenciaText = document.getElementById('viva-independencia-text');
+            const vivaPatriaText = document.getElementById('viva-patria-text');
+
+            // Function to launch confetti
+            function launchConfetti() {
+                confettiLaunchCount++; // Increment counter
+                confettiCountSpan.textContent = confettiLaunchCount; // Update display
+
+                for (let i = 0; i < 100; i++) { // Generate 100 confetti pieces
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    // Start confetti from a random horizontal position at the very top of the viewport
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = `${-Math.random() * 50}px`; // Start from -0px to -50px above the viewport
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotateZ(${Math.random() * 360}deg)`; // Random initial rotation
+                    document.body.appendChild(confetti);
+
+                    // Remove confetti after animation to prevent DOM clutter
+                    confetti.addEventListener('animationend', () => {
+                        confetti.remove();
+                    });
+                }
+            }
+
+            // Add event listener to the "Declarar la Independencia" button
+            declararIndependenciaBtn.addEventListener('click', () => {
+                // Increment and update the counter for "Declarar la Independencia"
+                declaracionCount++;
+                declararIndependenciaCount.textContent = declaracionCount;
+
+                // Trigger confetti effect
+                launchConfetti();
+
+                // Show and animate "¡SÍ, QUEREMOS!" text
+                siQueremosResult.style.display = 'block';
+                unanimousCryText.classList.remove('hidden-text'); // Show the "Con ese grito unánime" text
+
+                setTimeout(() => {
+                    siQueremosResult.style.display = 'none'; // Hide "¡SÍ, QUEREMOS!" after a delay
+                    unanimousCryText.classList.add('hidden-text'); // Hide "Con ese grito unánime" text after the same delay
+                }, 3000); // Adjust delay as needed
+            });
+
+            // Event listener for the general confetti button
+            const confettiBtn = document.getElementById('confettiBtn'); // Get the confetti button again
+            confettiBtn.addEventListener('click', () => {
+                launchConfetti();
+
+                // Show "Viva la Independencia"
+                vivaIndependenciaText.style.display = 'block';
+
+                // Show "Viva la Patria" after a delay
+                setTimeout(() => {
+                    vivaPatriaText.style.display = 'block';
+                }, 1000); // 1 second delay
+
+                setTimeout(() => {
+                    vivaIndependenciaText.style.display = 'none';
+                }, 3000); // Hide Viva la Independencia after 3 seconds from its appearance
+
+                setTimeout(() => {
+                    vivaPatriaText.style.display = 'none';
+                }, 4000); // Hide Viva la Patria after 3 seconds from its appearance (1s delay + 3s duration)
+            });
+
+            document.getElementById('btn-celebracion').addEventListener('click', () => {
+                generateImageForSection(prompts.celebracion, 'btn-celebracion', 'img-celebracion', 'spinner-celebracion', 'text-celebracion');
+            });
+        });
+    </script>
+</body>
+</html>
